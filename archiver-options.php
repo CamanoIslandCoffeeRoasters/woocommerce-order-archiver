@@ -1,6 +1,5 @@
 <?php
 
-// @TODO The name of this file is misleading...
 
 /*
 	Plugin Name: Woocommerce Order Archiving
