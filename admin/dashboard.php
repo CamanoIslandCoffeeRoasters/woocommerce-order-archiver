@@ -16,8 +16,11 @@ if (isset($_POST['monthsback'])) {
 	$args = array(
     'post_type' => 'shop_order',
     'post_status' => 'wc_completed',
+    'posts_per_page' => -1,
     'date_query' => array('before' => $months_back)
 	);
+	
+	
 	
 	$orders_array = get_posts($args);
 	
@@ -37,7 +40,7 @@ if (isset($_POST['monthsback'])) {
 	     
 	    $ourOrder       = new WC_Order($orderID->ID);
 	    $orderArray		= get_post_meta($orderID->ID);
-	    $subscriptionID = $orderArray['subscription_id'];
+	    $subscriptionID = $orderArray['subscription_id'][0];
 	    $source         = $orderArray['subscription_source'];
 	    $customerUser   = isset($ourOrder->customer_user) ? $ourOrder->customer_user : '1';
 	    $first          = isset($ourOrder->billing_first_name) ? $ourOrder->billing_first_name : '1';
@@ -63,7 +66,7 @@ if (isset($_POST['monthsback'])) {
 	        $skus[] = $item->get_sku();
 			
 		}
-			
+		
         $orderItems = implode($skus, ",");
         $params     = array(
             'order_Id' => $orderID->ID,
@@ -75,8 +78,10 @@ if (isset($_POST['monthsback'])) {
             'products' => $orderItems,
             'order_total' => $orderTotal,
             'auth_profile' => $authProfile,
-            'address' => $ourOrder->formatted_shipping_address );
+            'address' => $ourOrder->get_formatted_shipping_address());
         $wpdb->insert($wpdb->prefix . 'orders_archived', $params);
+		
+		
 		
 		
 		/*

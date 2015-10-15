@@ -32,14 +32,15 @@ function build_table() {
 	"CREATE TABLE IF NOT EXISTS `" . $table_name . "` (
 	  `id` int(11) NOT NULL AUTO_INCREMENT,
 	  `order_id` int(11) NOT NULL,
-	  `user_id` int(11) NOT NULL,
-	  `subscription_id` int(11) NOT NULL,
-	  `name` varchar(255) NOT NULL,
-	  `date` date NOT NULL,
-	  `email` varchar(255) NOT NULL,
-	  `products` varchar(255) NOT NULL,
-	  `order_total` decimal(15,2) NOT NULL,
-	  `auth_profile` int(11) NOT NULL,
+	  `user_id` int(11) NULL,
+	  `subscription_id` int(11) NULL,
+	  `name` varchar(255) NULL,
+	  `date` date NULL,
+	  `email` varchar(255) NULL,
+	  `products` varchar(255) NULL,
+	  `order_total` decimal(15,2) NULL,
+	  `auth_profile` int(11) NULL,
+	  `address` varchar(255) NULL,
 	  PRIMARY KEY (`id`)
 	) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0;";
 	
