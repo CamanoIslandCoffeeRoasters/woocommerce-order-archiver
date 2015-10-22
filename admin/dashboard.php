@@ -15,7 +15,7 @@ if (isset($_POST['monthsback'])) {
 	
 	$args = array(
     'post_type' => 'shop_order',
-    'post_status' => 'wc_completed',
+    'post_status' => 'wc-completed',
     'posts_per_page' => -1,
     'date_query' => array('before' => $months_back)
 	);
@@ -59,14 +59,13 @@ if (isset($_POST['monthsback'])) {
 		
 	    foreach ($items as $item) {
 			
-	        $skus   = array();
 	        $id     = '';
 	        $id     = (isset($item['item_meta']['_variation_id'])) ? $item['item_meta']['_variation_id'][0] : $item['item_meta']['_product_id'][0];
 	        $item   = new WC_Product($id);
 	        $skus[] = $item->get_sku();
 			
 		}
-		
+		var_dump($skus);
         $orderItems = implode($skus, ",");
         $params     = array(
             'order_Id' => $orderID->ID,
